@@ -1,0 +1,6 @@
+apps:
+  - script: app.js
+    name: api
+    autorestart: true
+    watch: true
+    node_args: -r dotenv/config --inspect=localhost:9230

@@ -1,0 +1,310 @@
+customers:
+  _id (ObjectId)
+  isAvailable (Boolean)
+  businessName (String)
+  offlineContactEmail (String)
+  whatsappApiUrl (String)
+  whatsappApiToken (String)
+  whatsappApiInstanceId (Number)
+  gmailAuthToken (String)
+  gmailAccessToken (String)
+  gmailRefreshToken (String)
+  timezone (String)
+  lang (String)
+  offline (Object):
+    message (String)
+    from (String)
+    to (String)
+  defaultMessage (String)
+  broadcastPause (Object):
+    start (String)
+    end (String)
+  subscribeReply
+  unsubscribeReply
+  createdAt (String)
+
+teammates:
+  _id (ObjectId)
+  name (String)
+  email (String)
+  password (String)
+  isAvailable (Boolean)
+  [customerId] (String)
+  photo (String)
+  isCustomer (Boolean)
+  createdAt (String)
+
+contacts:
+  _id (ObjectId)
+  [customerId] (String)
+  [teammateId] (String)
+  [name] (String)
+  [email] (String)
+  [whatsapp] (Number)
+  charPhotoColor (String)
+  lastConversation (Object):
+    message (String)
+    isFromTeammate (String)
+    type (String)
+    unreads (Number)
+    createdAt (String)
+  [isArchived] (Boolean)
+  isBlocked (Boolean)
+  [hasUnread] (Boolean)
+  isUnsubscribed (Boolean)
+  isRenamed (Boolean)
+  createdAt (String)
+
+contactRemarks:
+  _id (ObjectId)
+  [customerId] (String)
+  [teammateId] (String)
+  [contactId] (String)
+  remark (String)
+  createdAt (String)
+
+conversations:
+  _id (ObjectId)
+  messageId (String)
+  [customerId] (String)
+  [teammateId] (String)
+  [contactId] (String)
+  senderId (String) 
+  message (String)
+  type (String)
+  caption (String)
+  createdAt (String)
+  status (String) [sent, delivered, viewed]
+  isFromTeammate (Boolean)
+  isInternal (Boolean)
+  [isRead] (Boolean)
+  fileName (String)
+
+groups:
+  _id (ObjectId)
+  [customerId] (String)
+  [whatsappGroupId] (String)
+  name (String)
+  charPhotoColor (String)
+  lastConversation (Object):
+    message (String)
+    isFromTeammate (String)
+    type (String)
+    unreads (Number)
+    senderName (String)
+    createdAt (String)
+  createdAt (String)
+
+groupConversations:
+  _id (ObjectId)
+  [customerId] (String)
+  [groupId] (String)
+  [teammateId] (String)
+  senderId (String)
+  isFromTeammate (Boolean)
+  isRead (Boolean)
+  message (String)
+  messageId (String)
+  type (String)
+  contactId (String)
+  createdAt (String)
+  status (String) [sent, delivered, viewed]
+
+groupParticipants:
+  _id (ObjectId)
+  customerId (String)
+  groupId (String)
+  contactId (String)
+  createdAt (String)
+
+sequences:
+  _id (ObjectId)
+  [customerId] (String)
+  name (String)
+  isEnabled (Boolean)
+  createdAt (String)
+
+sequenceMessages:
+  _id (ObjectId)
+  [customerId] (String)
+  [sequenceId] (String)
+  name (String)
+  message (String)
+  photo (Object):
+    data (String)
+    filename (String)
+  schedule (Array)
+  isEnabled (Boolean)
+  createdAt (String)
+
+scheduledMessages:
+  _id (ObjectId)
+  [customerId] (String)
+  [contactId] (String)
+  message (String)
+  photo (Object):
+    data (String)
+    filename (String)
+  startAt (String)
+  status (String)
+  createdAt (String)
+
+subscriptions:
+  _id (ObjectId)
+  [customerId] (String)
+  [contactId] (String)
+  [sequenceId] (String)
+  createdAt (String)
+
+subscriptionJobs:
+  _id (ObjectId)
+  [customerId] (String)
+  [subscriptionId] (String)
+  message (String)
+  photo (Object):
+    data (String)
+    filename (String)
+  phone (String)
+  whatsappApiUrl (String)
+  whatsappApiToken (String)
+  sendOn (Timestamp)
+
+tags:
+  _id (ObjectId)
+  [customerId] (String)
+  name (String)
+  createdAt (String)
+
+contactTags:
+  _id (ObjectId)
+  [customerId] (String)
+  [teammateId] (String)
+  [contactId] (String)
+  [tagId] (String)
+  createdAt (String)
+
+broadcasts:
+  _id (ObjectId)
+  [customerId] (String)
+  conditions (Array):
+    0 (Object):
+      condition (String) [is, isnt]
+      tagId (String)
+  conditonType (String) [all, any]
+  targets (String) [tags, customFields]
+  customFields (Array):
+    0 (Object):
+      field (String)
+      value (String)
+  messages (Array):
+    0 (Object):
+      data (String)
+      type (String) [chat, image, document, ptt, vcard, audio, video]
+      meta (String)
+  name (String)
+  startAt (String)
+  report (Object):
+    sent (Number)
+    delivered (Number)
+    viewed (Number)
+    total (Number)
+  createdAt (String)
+
+keywords:
+  _id (ObjectId)
+  [customerId] (String)
+  condition (String) [is, contains, startWith]
+  actions (Array) [reply, addTag, addSubscription, addCustomFields]
+  keywords (Array)
+  meta (Object):
+    messages (Array):
+      0 (Object):
+        data (String)
+        type (String) [chat, image, document, ptt, vcard, audio, video]
+        meta (String)
+    sequenceId
+    tags (Array)
+    customFields (Array):
+      0 (Object):
+        field (String)
+        value (String)
+  isEnabled (Boolean)
+  createdAt (String)
+
+invitations:
+  _id (ObjectId)
+  code (String)
+  isActive (Boolean)
+  createdAt (String)
+
+snoozeContactJobs:
+  _id (ObjectId)
+  [customerId] (String)
+  [contactId] (String)
+  unarchiveOn (String)
+  createdAt (String)
+
+whatsappJobs:
+  _id (ObjectId)
+  [customerId] (String)
+  [isRunning] (Boolean)
+  lastScanned (Number)
+  updatedAt (String)
+
+broadcastJobs:
+  _id (ObjectId)
+  [customerId] (String)
+  [broadcastId] (String)
+  message (Object):
+    data (String)
+    type (String) [chat, image, document, ptt, vcard]
+    meta (String)
+  phone (String)
+  whatsappApiUrl (String)
+  whatsappApiToken (String)
+  whatsappApiInstanceId (String)
+  sendOn (Timestamp)
+  [messageId] (String)
+  isDelivered (Boolean)
+
+mentions:
+  _id (ObjectId)
+  [customerId] (String)
+  [contactId] (String)
+  [conversationId] (String)
+  [fromId] (String)
+  [toId] (String)
+  createdAt (String)
+
+faqs:
+  _id (ObjectId)
+  [customerId] (String)
+  question (String)
+  answer (String)
+  createdAt (String)
+
+assignmentRules:
+  _id (ObjectId)
+  [customerId] (String)
+  [assigneeId] (String)
+  name (String)
+  category (String)
+  condition (String)
+  value (String)
+  isActive (Boolean)
+  createdAt (String)
+
+admin:
+  _id (ObjectId)
+  username (String)
+  password (String)
+  phone (String)
+  verifyRequestId (String)
+
+customFields:
+  _id (ObjectId)
+  customerId (String)
+  contactId (String)
+  field (String)
+  value (String)
+  createdAt (String)

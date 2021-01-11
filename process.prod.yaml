@@ -1,0 +1,10 @@
+apps:
+  - script: app.js
+    name: api
+    autorestart: true
+    instances: max
+    exec_mode: cluster
+    node_args: -r dotenv/config
+    max_memory_restart: 250M
+    error_file: error.log
+    out_file: out.log

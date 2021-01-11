@@ -1,0 +1,20 @@
+version: "3"
+services:
+  api:
+    image: xman/api
+    deploy:
+      replicas: 5
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "2049:2048"
+    depends_on:
+      - mongodb
+    networks:
+      - webnet
+    extra_hosts:
+      - "mongodb-cluster-arbiters-vm-0:IP"
+      - "mongodb-cluster-servers-vm-0:IP"
+      - "mongodb-cluster-servers-vm-1:IP"
+networks:
+  webnet:

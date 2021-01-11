@@ -1,0 +1,13 @@
+node_modules
+.env
+credentials.json
+serviceCredentials.json
+db/exporter/output.csv
+.DS_Store
+docker-stack.yml
+scripts/db-backup.sh
+scripts/nginx-restarter.sh
+nginx.conf
+TODO
+repl.js
+*.log
